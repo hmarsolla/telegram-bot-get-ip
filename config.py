@@ -1,0 +1,2 @@
+CHATIDLIST=['','']
+TOKEN=''

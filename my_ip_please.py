@@ -23,12 +23,18 @@ def where(bot, update):
             msg = f'IP #{number + 1} - {ip}'
             bot.send_message(chat_id=update.message.chat_id, text=msg)
 
+def getid(bot, update):
+        bot.send_message(chat_id=update.message.chat_id, text=str(update.message.chat_id))
+
 # Handlers
 start_handler = CommandHandler('start', start)
 dispatcher.add_handler(start_handler)
 
 where_handler = CommandHandler('where', where)
 dispatcher.add_handler(where_handler)
+
+getid_handler = CommandHandler('getid', getid)
+dispatcher.add_handler(getid_handler)
 
 #if __name__ == 'main':
 print('IP Bot Started')

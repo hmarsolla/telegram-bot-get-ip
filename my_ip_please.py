@@ -2,6 +2,8 @@ import logging
 import socket
 import telegram
 import config
+import os
+import re
 from telegram.ext import CommandHandler, Updater
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -25,6 +27,23 @@ def where(bot, update):
 
 def getid(bot, update):
         bot.send_message(chat_id=update.message.chat_id, text=str(update.message.chat_id))
+        
+def find(bot, update):
+    if update.message.chat_id in config.CHATIDLIST:  
+        
+        texto=update.message.text
+        texto=texto[6:]
+        regex = re.compile(texto)
+        
+        os.chdir('/')
+        result = []
+        for root, dirs, files in os.walk(os.getcwd()):
+                lista=list(filter(regex.search, files))
+                if lista:
+                        for item in lista:
+                                result.append(os.path.join(root, item))
+
+        bot.send_message(chat_id=update.message.chat_id, text=result)
 
 # Handlers
 start_handler = CommandHandler('start', start)
@@ -35,6 +54,9 @@ dispatcher.add_handler(where_handler)
 
 getid_handler = CommandHandler('getid', getid)
 dispatcher.add_handler(getid_handler)
+
+find_handler = CommandHandler('find', find)
+dispatcher.add_handler(find_handler)
 
 #if __name__ == 'main':
 print('IP Bot Started')

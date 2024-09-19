@@ -3,7 +3,7 @@ certifi==2024.7.4
 cffi==1.14.5
 cryptography==43.0.1
 future==0.17.1
-idna==2.7
+idna==3.7
 pip==21.1
 pycparser==2.19
 python-telegram-bot==11.1.0
